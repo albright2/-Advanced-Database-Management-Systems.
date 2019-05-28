@@ -1,0 +1,24 @@
+
+Create view artist_no_of_sculpture (artist_names,no_of_sculptures)
+as Select artist_name, count(*)
+From Sculpture_view
+Group by artist_name
+having count(*) > 2
+;
+
+
+
+################################
+select * from artist_no_of_sculpture;
+
+
+---------results--
+
++--------------+------------------+
+| artist_names | no_of_sculptures |
++--------------+------------------+
+| jenkins      |                3 |
++--------------+------------------+
+
+#artist ben creted 2 sculptures which isnt >2
+#jenkins created 3, 3>2

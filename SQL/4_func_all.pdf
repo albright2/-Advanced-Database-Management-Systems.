@@ -1,0 +1,28 @@
+Delimiter $
+
+Create function No_of_painting_exhibited(exhibition_name varchar(60))
+RETURNS INT
+BEGIN
+
+DECLARE no_of_paintings INT;
+Set no_of_paintings= (
+Select count(*)   
+FROM Shown_at as a, Painting_view as b
+WHERE a.exhibition_name = exhibition_name and a.art = b.id_no );
+return no_of_paintings;
+END$
+Delimiter ;
+
+##############################################
+
+#selecting the tuples from exhibition named E1, along count of exhibitions
+
+SELECT name, start_date, end_date, No_of_painting_exhibited(name) as 'No_of_painting_exhibited'
+From Exhibition
+WHERE name = 'E1';
+
++------+------------+----------+--------------------------+
+| name | start_date | end_date | No_of_painting_exhibited |
++------+------------+----------+--------------------------+
+| E1   | 100        | 101      |                        2 |
++------+------------+----------+--------------------------+
